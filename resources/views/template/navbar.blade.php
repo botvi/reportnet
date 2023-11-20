@@ -24,7 +24,7 @@
                 <li class="sidebar-item  ">
                     <a href="/lokasi" class='sidebar-link'>
                         <i class="bi bi-file-earmark-spreadsheet-fill"></i>
-                        <span>Example</span>
+                        <span>Lokasi</span>
                     </a>
                 </li>
             </ul>
