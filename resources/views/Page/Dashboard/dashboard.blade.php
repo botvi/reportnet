@@ -1,97 +1,85 @@
+<style>
+    .rounded-icon {
+        border-radius: 50%;
+    }
+</style>
+
+<!-- resources/views/template/layout.blade.php -->
+
 @extends('template.layout')
+
 @section('content')
-<div class="page-heading">
-    <h3>Profile Statistics</h3>
-</div>
-<div class="page-content">
-    <section class="row">
-        <div class="col-12 col-lg-9">
-            <div class="row">
-                <div class="col-6 col-lg-3 col-md-6">
-                    <div class="card">
-                        <div class="card-body px-3 py-4-5">
-                            <div class="row">
-                                <div class="col-md-4">
-                                    <div class="stats-icon purple">
-                                        <i class="iconly-boldShow"></i>
-                                    </div>
-                                </div>
-                                <div class="col-md-8">
-                                    <h6 class="text-muted font-semibold">Profile Views</h6>
-                                    <h6 class="font-extrabold mb-0">112.000</h6>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-6 col-lg-3 col-md-6">
-                    <div class="card">
-                        <div class="card-body px-3 py-4-5">
-                            <div class="row">
-                                <div class="col-md-4">
-                                    <div class="stats-icon blue">
-                                        <i class="iconly-boldProfile"></i>
-                                    </div>
-                                </div>
-                                <div class="col-md-8">
-                                    <h6 class="text-muted font-semibold">Followers</h6>
-                                    <h6 class="font-extrabold mb-0">183.000</h6>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-6 col-lg-3 col-md-6">
-                    <div class="card">
-                        <div class="card-body px-3 py-4-5">
-                            <div class="row">
-                                <div class="col-md-4">
-                                    <div class="stats-icon green">
-                                        <i class="iconly-boldAdd-User"></i>
-                                    </div>
-                                </div>
-                                <div class="col-md-8">
-                                    <h6 class="text-muted font-semibold">Following</h6>
-                                    <h6 class="font-extrabold mb-0">80.000</h6>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-6 col-lg-3 col-md-6">
-                    <div class="card">
-                        <div class="card-body px-3 py-4-5">
-                            <div class="row">
-                                <div class="col-md-4">
-                                    <div class="stats-icon red">
-                                        <i class="iconly-boldBookmark"></i>
-                                    </div>
-                                </div>
-                                <div class="col-md-8">
-                                    <h6 class="text-muted font-semibold">Saved Post</h6>
-                                    <h6 class="font-extrabold mb-0">112</h6>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
+    <div class="page-heading">
+        <h3>Profile Statistics</h3>
+    </div>
+    <div class="page-content">
+        <section class="row">
+            <div class="col-12 col-lg-9">
+                <div id="map" style="height: 500px;"></div>
+
+                <script src="{{ asset('js/app.js') }}"></script>
+                <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
+
+                <script>
+                    var map = L.map('map').setView([{{ $lokasis->first()->latitude }}, {{ $lokasis->first()->longitude }}], 13);
+
+                    L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+                        attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+                    }).addTo(map);
+
+                    @foreach($lokasis as $lokasi)
+                        var latitude = {{ $lokasi->latitude }};
+                        var longitude = {{ $lokasi->longitude }};
+
+                        // Marker dengan ikon kustom
+                        var customIcon = L.divIcon({
+                            className: 'rounded-icon',
+                            html: '<img src="{{ asset("storage/" . $lokasi->icon_path) }}" class="rounded-icon" style="width: 32px; height: 32px;">',
+                            iconSize: [32, 32],
+                            iconAnchor: [16, 32],
+                            popupAnchor: [0, -32]
+                        });
+
+                        var marker = L.marker([latitude, longitude], {icon: customIcon}).addTo(map);
+
+                        // Tambahkan label dengan nama lokasi
+                        marker.bindTooltip("{{ $lokasi->name }}", {permanent: true, className: "location-label", offset: [0, 0]});
+
+                        // GeoJSON poligon dengan warna dari atribut lokasi
+                        var polygon = {
+                            "type": "Feature",
+                            "geometry": {
+                                "type": "Polygon",
+                                "coordinates": [
+                                    [
+                                        [longitude - 0.001, latitude - 0.001],
+                                        [longitude + 0.001, latitude - 0.001],
+                                        [longitude + 0.001, latitude + 0.001],
+                                        [longitude - 0.001, latitude + 0.001],
+                                        [longitude - 0.001, latitude - 0.001]
+                                    ]
+                                ]
+                            },
+                            "properties": {
+                                "color": '{{ $lokasi->polygon_color }}' // Ganti dengan atribut warna dari lokasi
+                            }
+                        };
+
+                        // Tambahkan GeoJSON poligon ke peta
+                        L.geoJSON(polygon, {
+                            style: function (feature) {
+                                return {
+                                    fillColor: feature.properties.color,
+                                    weight: 2,
+                                    opacity: 1,
+                                    color: 'white',
+                                    fillOpacity: 0.7
+                                };
+                            }
+                        }).addTo(map);
+                    @endforeach
+                </script>
             </div>
-        </div>
-        <div class="col-12 col-lg-3">
-            <div class="card">
-                <div class="card-body py-4 px-5">
-                    <div class="d-flex align-items-center">
-                        <div class="avatar avatar-xl">
-                            <img src="{{ asset('dist') }}/assets/images/faces/1.jpg" alt="Face 1">
-                        </div>
-                        <div class="ms-3 name">
-                            <h5 class="font-bold">John Duck</h5>
-                            <h6 class="text-muted mb-0">@johnducky</h6>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-</div>
+        </section>
+    </div>
 @endsection

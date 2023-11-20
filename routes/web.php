@@ -3,6 +3,8 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\{
     HomeController,
+    LokasiController,
+    NetworkSpeedController,
 
 };
 
@@ -21,4 +23,12 @@ use App\Http\Controllers\{
 //     return view('welcome');
 // });
 Route::get('/', [HomeController::class, 'index'])->name('home');
-Route::get('/pagetest', [HomeController::class, 'testpage'])->name('pagetest');
+// routes/web.php
+
+
+Route::get('/lokasi', [LokasiController::class, 'index'])->name('lokasi.index');
+Route::post('/lokasi/store', [LokasiController::class, 'store'])->name('lokasi.store');
+
+
+Route::post('/measure-speed', [NetworkSpeedController::class, 'measureSpeed']);
+Route::get('/speed', [NetworkSpeedController::class, 'index'])->name('speed.index');

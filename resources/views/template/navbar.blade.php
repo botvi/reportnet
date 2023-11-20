@@ -14,7 +14,7 @@
             <ul class="menu">
                 <li class="sidebar-title">Menu</li>
 
-                <li class="sidebar-item active ">
+                <li class="sidebar-item">
                     <a href="/" class='sidebar-link'>
                         <i class="bi bi-grid-fill"></i>
                         <span>Dashboard</span>
@@ -22,7 +22,7 @@
                 </li>
 
                 <li class="sidebar-item  ">
-                    <a href="/pagetest" class='sidebar-link'>
+                    <a href="/lokasi" class='sidebar-link'>
                         <i class="bi bi-file-earmark-spreadsheet-fill"></i>
                         <span>Example</span>
                     </a>

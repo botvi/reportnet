@@ -3,17 +3,19 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Models\Lokasi;
+
 
 class HomeController extends Controller
 {
 
     public function index()
     {
-        return view('Page.Dashboard.dashboard');
+        $lokasis = Lokasi::all();
+        return view('Page.Dashboard.dashboard', compact('lokasis'));
     }
-    public function testpage()
-    {
-        return view('Page.Test.show');
-    }
+   
+
+   
 }
 
