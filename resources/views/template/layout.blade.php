@@ -43,6 +43,7 @@
         </div>
     </div>
     @yield('modal')
+    @include('sweetalert::alert')
 
     <script src="{{ asset('dist') }}/assets/vendors/perfect-scrollbar/perfect-scrollbar.min.js"></script>
     <script src="{{ asset('dist') }}/assets/js/bootstrap.bundle.min.js"></script>
@@ -79,6 +80,25 @@
             });
         });
     </script>
+ <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+<script>
+    function destroy(url) {
+        console.log("ok");
+        Swal.fire({
+            title: 'Yakin?',
+            text: "data ini akan di hapus?",
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonColor: '#3085d6',
+            cancelButtonColor: '#d33',
+            confirmButtonText: 'Oke'
+        }).then((result) => {
+            if (result.isConfirmed) {
+                window.location.href = url;
+            }
+        })
+    }
+</script>
     
 
     @yield('script')

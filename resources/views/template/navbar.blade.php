@@ -22,9 +22,15 @@
                 </li>
 
                 <li class="sidebar-item  ">
-                    <a href="/lokasi" class='sidebar-link'>
+                    <a href="/instansi" class='sidebar-link'>
                         <i class="bi bi-file-earmark-spreadsheet-fill"></i>
-                        <span>Lokasi</span>
+                        <span>Instansi</span>
+                    </a>
+                </li>
+                <li class="sidebar-item  ">
+                    <a href="/maps" class='sidebar-link'>
+                        <i class="bi bi-geo-alt-fill"></i>
+                        <span>Maps</span>
                     </a>
                 </li>
             </ul>

@@ -3,25 +3,29 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use GuzzleHttp\Client;
+use App\Models\SpeedTest;
+
 
 class NetworkSpeedController extends Controller
-{
+{ 
     public function index()
     {
         return view('speed');
     }
 
-    public function measureSpeed(Request $request)
+    public function store(Request $request)
     {
-        $ipToTest = $request->input('ip');
+        // Terima data kecepatan unduh dari sisi klien
+        $downloadSpeed = $request->input('download_speed');
 
-        // Ganti perintah ping dengan opsi yang sesuai dengan lingkungan Anda
-        exec("ping $ipToTest -n 4", $output, $status);
-
-        return response()->json([
-            'ip' => $ipToTest,
-            'status' => $status,
-            'output' => $output,
+        // Simpan kecepatan unduh ke database
+        SpeedTest::create([
+            'download_speed' => $downloadSpeed,
         ]);
+
+        // Tampilkan hasil kecepatan unduh
+        return response()->json(['download_speed' => $downloadSpeed]);
     }
+    
 }

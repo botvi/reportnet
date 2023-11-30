@@ -1,11 +1,3 @@
-<style>
-    .rounded-icon {
-        border-radius: 50%;
-    }
-</style>
-
-<!-- resources/views/template/layout.blade.php -->
-
 @extends('template.layout')
 
 @section('content')
@@ -15,7 +7,7 @@
     <div class="page-content">
         <section class="row">
             <div class="col-12 col-lg-9">
-                <div id="map" style="height: 500px;"></div>
+                {{-- <div id="map" style="height: 500px;"></div>
 
                 <script src="{{ asset('js/app.js') }}"></script>
                 <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
@@ -27,11 +19,13 @@
                         attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
                     }).addTo(map);
 
+                    var speeds = {!! json_encode($speeds) !!};
+
                     @foreach($lokasis as $lokasi)
                         var latitude = {{ $lokasi->latitude }};
                         var longitude = {{ $lokasi->longitude }};
+                        var speed = speeds[{{ $lokasi->id }}];
 
-                        // Marker dengan ikon kustom
                         var customIcon = L.divIcon({
                             className: 'rounded-icon',
                             html: '<img src="{{ asset("storage/" . $lokasi->icon_path) }}" class="rounded-icon" style="width: 32px; height: 32px;">',
@@ -42,10 +36,16 @@
 
                         var marker = L.marker([latitude, longitude], {icon: customIcon}).addTo(map);
 
-                        // Tambahkan label dengan nama lokasi
-                        marker.bindTooltip("{{ $lokasi->name }}", {permanent: true, className: "location-label", offset: [0, 0]});
+                        var tooltipContent = "{{ $lokasi->name }}";
 
-                        // GeoJSON poligon dengan warna dari atribut lokasi
+                        if (speed !== null) {
+                            tooltipContent += " - Speed: " + speed + " Mbps";
+                        } else {
+                            tooltipContent += " - Speed: N/A (Error)";
+                        }
+
+                        marker.bindTooltip(tooltipContent, {permanent: true, className: "location-label", offset: [0, 0]});
+
                         var polygon = {
                             "type": "Feature",
                             "geometry": {
@@ -61,11 +61,10 @@
                                 ]
                             },
                             "properties": {
-                                "color": '{{ $lokasi->polygon_color }}' // Ganti dengan atribut warna dari lokasi
+                                "color": '{{ $lokasi->polygon_color }}'
                             }
                         };
 
-                        // Tambahkan GeoJSON poligon ke peta
                         L.geoJSON(polygon, {
                             style: function (feature) {
                                 return {
@@ -78,7 +77,7 @@
                             }
                         }).addTo(map);
                     @endforeach
-                </script>
+                </script> --}}
             </div>
         </section>
     </div>
