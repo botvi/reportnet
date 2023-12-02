@@ -14,4 +14,8 @@ class WebsiteController extends Controller
     {
         return view('website.pengaduan');
     }
+    public function tentang()
+    {
+        return view('website.tentang');
+    }
 }

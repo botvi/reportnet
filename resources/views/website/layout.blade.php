@@ -62,7 +62,7 @@
                             <a class="nav-link {{ Request::is('pengaduan') ? 'active' : '' }}" href="/pengaduan">Pengaduan</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link {{ Request::is('tentang') ? 'active' : '' }}" href="#">Tentang</a>
+                            <a class="nav-link {{ Request::is('tentang') ? 'active' : '' }}" href="/tentang">Tentang</a>
                         </li>
                         @auth
                         <li class="nav-item">

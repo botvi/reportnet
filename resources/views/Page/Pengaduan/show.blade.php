@@ -55,40 +55,44 @@
                                         </button>
 
                                     </td>
-                                 <td>
-                                    <button type="button" class="btn btn-primary btn-sm"
-                                    onclick="showSolusi('{{ $pengaduan->solusi }}')">Lihat Solusi
-                                </button>
-                                <td>
-                                    @php
-                                        $badgeColor = '';
-                                        $statusText = '';
-                                
-                                        switch ($pengaduan->status) {
-                                            case 'Terkirim':
-                                                $badgeColor = 'badge-danger';
-                                                $statusText = 'Belum di proses';
-                                                break;
-                                            case 'Proses':
-                                                $badgeColor = 'badge-warning';
-                                                $statusText = 'Proses';
-                                                break;
-                                            case 'Selesai':
-                                                $badgeColor = 'badge-success';
-                                                $statusText = 'Selesai';
-                                                break;
-                                            default:
-                                                $badgeColor = 'badge-secondary';
-                                                $statusText = 'Status tidak valid';
-                                        }
-                                    @endphp
-                                    <span class="badge {{ $badgeColor }}">{{ $statusText }}</span>
-                                </td>
-                                
                                     <td>
-                                        <a href="{{ route('pengaduan_admin.edit', $pengaduan->id) }}"
-                                            class="btn btn-success btn-sm ml-1 w-[50px]"><i
-                                                class="bi bi-pencil-square"></i></a>
+                                        <button type="button" class="btn btn-primary btn-sm"
+                                            onclick="showSolusi('{{ $pengaduan->solusi }}')">Lihat Solusi
+                                        </button>
+                                    <td>
+                                        @php
+                                            $badgeColor = '';
+                                            $statusText = '';
+
+                                            switch ($pengaduan->status) {
+                                                case 'Terkirim':
+                                                    $badgeColor = 'badge-danger';
+                                                    $statusText = 'Belum di proses';
+                                                    break;
+                                                case 'Proses':
+                                                    $badgeColor = 'badge-warning';
+                                                    $statusText = 'Proses';
+                                                    break;
+                                                case 'Selesai':
+                                                    $badgeColor = 'badge-success';
+                                                    $statusText = 'Selesai';
+                                                    break;
+                                                default:
+                                                    $badgeColor = 'badge-secondary';
+                                                    $statusText = 'Status tidak valid';
+                                            }
+                                        @endphp
+                                        <span class="badge {{ $badgeColor }}">{{ $statusText }}</span>
+                                    </td>
+
+                                   
+                                    <td>
+                                        @if ($pengaduan->status != 'Selesai')
+                                            <a href="{{ route('pengaduan_admin.edit', $pengaduan->id) }}"
+                                                class="btn btn-success btn-sm ml-1 w-[50px]">
+                                                <i class="bi bi-pencil-square"></i>
+                                            </a>
+                                        @endif
                                     </td>
                                 </tr>
                             @endforeach

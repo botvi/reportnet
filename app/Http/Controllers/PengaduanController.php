@@ -119,7 +119,7 @@ class PengaduanController extends Controller
         $chatId = $telegram->id_chat;
 
         // Construct the message text
-        $messageText = "Pengaduan baru dari {$namaInstansi} tentang {$deskripsiTitle}.";
+        $messageText = "Pengaduan baru dari <b>{$namaInstansi}</b> mengenai <b>{$deskripsiTitle}.</b>";
 
         // Construct the Telegram API URL
         $telegramApiUrl = "https://api.telegram.org/bot{$botToken}/sendMessage";
