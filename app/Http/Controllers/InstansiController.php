@@ -165,35 +165,33 @@ class InstansiController extends Controller
         try {
             // Use a transaction to ensure data consistency
             DB::beginTransaction();
-
-            // Find the Instansi by ID
-            $instansi = Instansi::where('user_id', $id)->first();
-
+    
+            // Find the Teknisi by ID
+            $instansi = Instansi::findOrFail($id);
+    
             if (!$instansi) {
-                // Handle case where Instansi is not found
+                // Handle case where Teknisi is not found
                 Alert::error('Error', 'Data instansi tidak ditemukan.');
                 return redirect()->back();
             }
-
-            // Delete the Instansi
-            $instansi->delete();
-
+    
             // Retrieve the associated user and delete it
-            $user = User::find($id);
-
+            $user = $instansi->user;
+            $instansi->delete();
+    
             if ($user) {
                 $user->delete();
             }
-
+    
             // Commit the transaction
             DB::commit();
-
+    
             Alert::success('Success', 'Data berhasil dihapus');
             return redirect()->back();
         } catch (\Exception $e) {
             // Rollback the transaction in case of an error
             DB::rollBack();
-
+    
             Alert::error('Error', 'Terjadi kesalahan: ' . $e->getMessage());
             return redirect()->back();
         }

@@ -47,4 +47,13 @@ class User extends Authenticatable
     {
         return $this->hasOne(Instansi::class);
     }
+    public function instansi_pengaduan()
+    {
+        return $this->belongsTo(Instansi::class, 'instansi_id');
+    }
+    public function instansi_telegram()
+    {
+        return $this->belongsTo(Instansi::class);
+    }
+
 }
