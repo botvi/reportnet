@@ -67,8 +67,7 @@
               <div class="col-md-5 col-lg-7 text-lg-center"><img class="img-fluid mb-5 mb-md-0" src="{{ asset('web/public') }}/assets/img/illustrations/2.png" alt="" /></div>
               <div class="col-md-7 col-lg-5 text-center text-md-start">
                 <h2>Ada kendala ?<br />Kami siap membantu</h2>
-                <p> <span class="text-1000 fs-1 ms-2 fw-medium">Webni<span class="fw-bold">KS</span></span> "Web Network
-                  Issues and Troubleshooting Kuansing" ,
+                <p>
                   Kami Menyediakan Banyak
                   Layanan yang Dapat Anda Gunakan
                   Anda dapat menjelajahi Layanan yang kami sediakan dengan menyenangkan dan Kepuasan masing-masing
@@ -392,8 +391,8 @@
   
           <div class="container">
             <div class="row">
-              <div class="col-12 col-lg-4 mb-3"><a href="#"><img class="d-inline-block align-middle" src="{{ asset('web/public') }}/assets/img/icons/logo.png" alt="" width="30" /><span class="d-inline-block text-1000 fs-1 ms-2 fw-medium lh-base">Webni<span class="fw-bold">KS</span></span></a>
-                <p class="my-3"> <span class="fw-medium">WebniKS </span>Web Network Issues and Troubleshooting Kuansing </p>
+              <div class="col-12 col-lg-4 mb-3"><a href="#"><img class="d-inline-block align-middle" src="{{ asset('web/public') }}/assets/img/icons/logo.png" alt="" width="30" /><span class="d-inline-block text-1000 fs-1 ms-2 fw-medium lh-base">Diskominfoss<span class="fw-bold">Net</span></span></a>
+                <p class="my-3"> <span class="fw-medium">DiskominfossNet </span>
                 <ul class="list-unstyled list-inline">
                   <li class="list-inline-item"><a class="text-decoration-none" href="#!">
                       <svg class="bi bi-facebook" xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="#F53838" viewBox="0 0 16 16">

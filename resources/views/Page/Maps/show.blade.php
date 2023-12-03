@@ -23,7 +23,7 @@
         <!-- ... (sesuaikan dengan kode sebelumnya) ... -->
         <section class="section">
             <div class="card">
-                <div id="map" style="height: 500px;"></div>
+                <div id="map" style="height: 600px;"></div>
 
                 <script>
                     var map = L.map('map').setView([{{ $instansi->first()->latitude }}, {{ $instansi->first()->longitude }}], 13);
@@ -40,7 +40,7 @@
                         var customIcon = L.divIcon({
                             className: 'rounded-icon',
                             // html: '<img src="{{ asset('storage/' . $instansi->icon) }}" class="rounded-icon" style="width: 32px; height: 32px;">',
-                            html: '<img src="{{ asset('storage/icons/loc.png') }}" class="rounded-icon" style="width: 32px; height: 32px;">',
+                            html: '<img src="{{ asset('dist/assets/icons/loc.png') }}" class="rounded-icon" style="width: 32px; height: 32px;">',
                             iconSize: [32, 32],
                             iconAnchor: [16, 32],
                             popupAnchor: [0, -32]
@@ -51,20 +51,35 @@
                         }).addTo(map);
 
                         // Tambahkan label dengan nama lokasi
-                        marker.bindTooltip("{{ $instansi->nama_instansi }}", {
-                            permanent: true,
-                            className: "location-label",
-                            offset: [0, 0]
-                        });
+                        marker.bindTooltip(
+                            '<b>{{ $instansi->nama_instansi }}</b>&nbsp; <img src="{{ asset('dist/assets/icons/up.png') }}" class="rounded-icon" style="width: 16px; height: 16px;">', {
+                                permanent: true,
+                                className: "location-label",
+                                offset: [0, 0]
+                            });
 
                         // Tambahkan event click pada marker
-                        marker.on('click', function (e) {
+                        marker.on('click', function(e) {
                             // Tampilkan informasi detail instansi
-                            var detailInfo = '<b>{{ $instansi->nama_instansi }}</b><br>' +
-                                             'Admin Jaringan: {{ $instansi->admin_jaringan }}<br>' +
-                                             'Telepon: {{ $instansi->telepon }}<br>' +
-                                             'IP WAN: {{ $instansi->ip_wan }}<br>'+
-                                             '<center><img src="{{ asset('storage/' . $instansi->icon) }}" class="rounded" style="width: 128px; height: 128px;"></center><br>';
+                            var detailInfo = '<b>{{ $instansi->nama_instansi }}</b>' +
+                                '<table style="width:100%">' +
+                                '    <tr>' +
+                                '        <td>Admin Jaringan</td>' +
+                                '        <td>:</td>' +
+                                '        <td>{{ $instansi->admin_jaringan }}</td>' +
+                                '    </tr>' +
+                                '    <tr>' +
+                                '        <td>Telepon</td>' +
+                                '        <td>:</td>' +
+                                '        <td>{{ $instansi->telepon }}</td>' +
+                                '    </tr>' +
+                                '    <tr>' +
+                                '        <td>IP WAN</td>' +
+                                '        <td>:</td>' +
+                                '        <td>{{ $instansi->ip_wan }}</td>' +
+                                '    </tr>' +
+                                '</table>' +
+                                '<center><img src="{{ asset('storage/' . $instansi->icon) }}" class="rounded" style="width: 128px; height: 128px;"></center><br>';
 
                             // Popup untuk menampilkan informasi detail
                             L.popup()

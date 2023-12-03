@@ -21,7 +21,7 @@
                 <div id="auth-left">
                     <div class="auth-logo">
                         <img src="{{ asset('web/public') }}/assets/img/icons/logo.png" alt=""class="mb-3"/>
-                        <span class="text-1000 fs-1 ms-2 fw-medium">Webni<span class="fw-bold">KS</span></span>
+                        <span class="text-1000 fs-1 ms-2 fw-medium">Diskominfoss<span class="fw-bold">Net</span></span>
                     </div>
                     <h1 class="auth-title">Log in.</h1>
                     <p class="auth-subtitle mb-5">Log in with your data that you entered during registration.</p>

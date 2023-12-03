@@ -10,7 +10,7 @@
     <!-- ===============================================-->
     <!--    Document Title-->
     <!-- ===============================================-->
-    <title>WebniKS | Landing &amp; Corporate Template</title>
+    <title>DiskominfossNet</title>
 
     {{-- DATATABLES --}}
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.5.2/css/bootstrap.css">
@@ -46,7 +46,7 @@
             <div class="container">
                 <a class="navbar-brand" href="#">
                     <img src="{{ asset('web/public') }}/assets/img/icons/logo.png" alt="" width="30" />
-                    <span class="text-1000 fs-1 ms-2 fw-medium">Webni<span class="fw-bold">KS</span></span><br>
+                    <span class="text-1000 fs-1 ms-2 fw-medium">Diskominfoss<span class="fw-bold">Net</span></span><br>
                 </a>
                 <button class="navbar-toggler collapsed" type="button" data-bs-toggle="collapse"
                     data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
@@ -68,7 +68,7 @@
                         </li>
                         @auth
                             <li class="nav-item">
-                                <a class="nav-link" href="#">Welcome, {{ Auth::user()->name }}</a>
+                                <a class="nav-link" href="/profil">Welcome, {{ Auth::user()->name }}</a>
                             </li>
                         @endauth
                     </ul>

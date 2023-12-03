@@ -1,7 +1,8 @@
 @extends('website.layout')
 @section('content')
 @section('style')
-<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous" />
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css"
+        integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous" />
 
     <style>
         .rounded-icon {
@@ -58,7 +59,7 @@
                                             // Marker dengan ikon kustom
                                             var customIcon = L.divIcon({
                                                 className: 'rounded-icon',
-                                                html: '<img src="{{ asset('storage/icons/loc.png') }}" class="rounded-icon" style="width: 32px; height: 32px;">',
+                                                html: '<img src="{{ asset('dist/assets/icons/loc.png') }}" class="rounded-icon" style="width: 32px; height: 32px;">',
                                                 iconSize: [32, 32],
                                                 iconAnchor: [16, 32],
                                                 popupAnchor: [0, -32]
@@ -79,9 +80,23 @@
                                             marker.on('click', function(e) {
                                                 // Tampilkan informasi detail instansi
                                                 var detailInfo = '<b>{{ $user->instansi->nama_instansi }}</b><br>' +
-                                                    'Admin Jaringan: {{ $user->instansi->admin_jaringan }}<br>' +
-                                                    'Telepon: {{ $user->instansi->telepon }}<br>' +
-                                                    'IP WAN: {{ $user->instansi->ip_wan }}<br>'+
+                                                    '<table style="width:100%">' +
+                                                    '    <tr>' +
+                                                    '        <td>Admin Jaringan</td>' +
+                                                    '        <td>:</td>' +
+                                                    '        <td>{{ $user->instansi->admin_jaringan }}</td>' +
+                                                    '    </tr>' +
+                                                    '    <tr>' +
+                                                    '        <td>Telepon</td>' +
+                                                    '        <td>:</td>' +
+                                                    '        <td>{{ $user->instansi->telepon }}</td>' +
+                                                    '    </tr>' +
+                                                    '    <tr>' +
+                                                    '        <td>IP WAN</td>' +
+                                                    '        <td>:</td>' +
+                                                    '        <td>{{ $user->instansi->ip_wan }}</td>' +
+                                                    '    </tr>' +
+                                                    '</table>' +
                                                     '<center><img src="{{ asset('storage/' . $user->instansi->icon) }}" class="rounded" style="width: 128px; height: 128px;"></center><br>';
 
                                                 // Popup untuk menampilkan informasi detail
