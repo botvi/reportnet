@@ -58,7 +58,7 @@
                                             // Marker dengan ikon kustom
                                             var customIcon = L.divIcon({
                                                 className: 'rounded-icon',
-                                                html: '<img src="{{ asset('storage/' . $user->instansi->icon) }}" class="rounded-icon" style="width: 32px; height: 32px;">',
+                                                html: '<img src="{{ asset('storage/icons/loc.png') }}" class="rounded-icon" style="width: 32px; height: 32px;">',
                                                 iconSize: [32, 32],
                                                 iconAnchor: [16, 32],
                                                 popupAnchor: [0, -32]
@@ -81,7 +81,8 @@
                                                 var detailInfo = '<b>{{ $user->instansi->nama_instansi }}</b><br>' +
                                                     'Admin Jaringan: {{ $user->instansi->admin_jaringan }}<br>' +
                                                     'Telepon: {{ $user->instansi->telepon }}<br>' +
-                                                    'IP WAN: {{ $user->instansi->ip_wan }}<br>';
+                                                    'IP WAN: {{ $user->instansi->ip_wan }}<br>'+
+                                                    '<center><img src="{{ asset('storage/' . $user->instansi->icon) }}" class="rounded" style="width: 128px; height: 128px;"></center><br>';
 
                                                 // Popup untuk menampilkan informasi detail
                                                 L.popup()
