@@ -63,7 +63,7 @@
                 <td>
                     <h4>
                         LAPORAN PENGADUAN DENGAN STATUS SELESAI<br />
-                        WEBNIKS</h4>
+                        DISKOMINFOSSNET</h4>
 
                     <p style="margin-left:0px; margin-right:0px">Alamat : Taluk Kuantan, Kode Pos : 29295, No. Telp :
                         6692232</p>
