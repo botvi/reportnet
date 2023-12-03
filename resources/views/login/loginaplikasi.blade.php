@@ -10,7 +10,7 @@
     <link rel="stylesheet" href="{{ asset('dist') }}/assets/vendors/bootstrap-icons/bootstrap-icons.css">
     <link rel="stylesheet" href="{{ asset('dist') }}/assets/css/app.css">
     <link rel="stylesheet" href="{{ asset('dist') }}/assets/css/pages/auth.css">
-	
+
 </head>
 
 <body>
@@ -20,14 +20,15 @@
             <div class="col-lg-5 col-12">
                 <div id="auth-left">
                     <div class="auth-logo">
-                        <a href="index.html"><img src="{{ asset('dist') }}/assets/images/logo/logo.png" alt="Logo"></a>
+                        <img src="{{ asset('web/public') }}/assets/img/icons/logo.png" alt=""class="mb-3"/>
+                        <span class="text-1000 fs-1 ms-2 fw-medium">Webni<span class="fw-bold">KS</span></span>
                     </div>
                     <h1 class="auth-title">Log in.</h1>
                     <p class="auth-subtitle mb-5">Log in with your data that you entered during registration.</p>
 
                     <form action="{{ route('postlogin') }}" method="POST">
-                        {{ csrf_field() }} 
-						<div class="form-group position-relative has-icon-left mb-4">
+                        {{ csrf_field() }}
+                        <div class="form-group position-relative has-icon-left mb-4">
                             <input type="text" class="form-control form-control-xl" name="username"
                                 placeholder="Username" type="username">
                             <div class="form-control-icon">
@@ -42,7 +43,7 @@
                             </div>
                         </div>
 
-                        <button class="btn btn-primary btn-block btn-lg shadow-lg mt-5">Log in</button>
+                        <button class="btn btn-danger btn-block btn-lg shadow-lg mt-5">Log in</button>
                     </form>
                 </div>
             </div>

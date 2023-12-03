@@ -55,5 +55,9 @@ class User extends Authenticatable
     {
         return $this->belongsTo(Instansi::class);
     }
+    public function instansi_profil()
+{
+    return $this->hasOne(Instansi::class, 'user_id');
+}
 
 }

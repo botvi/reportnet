@@ -31,7 +31,7 @@
                 </li>
                 <li class="sidebar-item  ">
                     <a href="/instansi" class='sidebar-link'>
-                        <i class="bi bi-file-earmark-spreadsheet-fill"></i>
+                        <i class="bi bi-people"></i>
                         <span>Instansi</span>
                     </a>
                 </li>
@@ -52,6 +52,19 @@
                 </li>
                 @endif
                 @if (auth()->user()->role == 'admin')
+               
+                <li class="sidebar-item  has-sub">
+                    <a href="#" class='sidebar-link'>
+                        <i class="bi bi-file-earmark-spreadsheet-fill"></i>
+                        <span>Laporan</span>
+                    </a>
+                    <ul class="submenu ">
+                        <li class="submenu-item ">
+                            <a href="/laporan">Pengaduan Selesai</a>
+                        </li>
+                       
+                    </ul>
+                </li>
                 <li class="sidebar-item  ">
                     <a href="/api" class='sidebar-link'>
                         <i class="bi bi-gear-fill"></i>
