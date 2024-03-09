@@ -30,9 +30,15 @@
                                 <div class="col-md-6">
                                     <div class="mb-3">
                                         <label for="nama_instansi" class="form-label">Nama Instansi</label>
-                                        <input type="text" class="form-control" id="nama_instansi" name="nama_instansi" placeholder="Nama Instansi">
+                                        <select class="form-select" id="nama_instansi" name="nama_instansi">
+                                            <option selected disabled>Pilih Nama Instansi</option>
+                                            @foreach($interfaces as $interface)
+                                                <option value="{{ $interface['name'] }}">{{ $interface['name'] }}</option>
+                                            @endforeach
+                                        </select>
                                     </div>
                                 </div>
+                                
                                 <div class="col-md-6">
                                     <div class="mb-3">
                                         <label for="admin_jaringan" class="form-label">Admin Jaringan</label>
@@ -45,10 +51,11 @@
                                         <input type="text" class="form-control" id="telepon" name="telepon" placeholder="Telepon">
                                     </div>
                                 </div>
+                               
                                 <div class="col-md-6">
                                     <div class="mb-3">
-                                        <label for="ip_wan" class="form-label">IP WAN</label>
-                                        <input type="text" class="form-control" id="ip_wan" name="ip_wan" placeholder="IP WAN">
+                                        <label for="mac_address" class="form-label">MAC Address</label>
+                                        <input type="text" class="form-control" id="mac_address" name="mac_address" readonly>
                                     </div>
                                 </div>
                                 <div class="col-md-6">
@@ -99,4 +106,26 @@
 
 
 
+@endsection
+@section('script')
+
+<script>
+    // Dapatkan elemen select
+    var selectInterface = document.getElementById("nama_instansi");
+    var inputMacAddress = document.getElementById("mac_address");
+    
+    // Tambahkan event listener untuk perubahan pada select interface
+    selectInterface.addEventListener("change", function() {
+        // Dapatkan nilai yang dipilih
+        var selectedInterface = selectInterface.value;
+        
+        // Cari interface yang sesuai dengan nama yang dipilih
+        var selectedInterfaceData = {!! json_encode($interfaces) !!}.find(function(interface) {
+            return interface.name === selectedInterface;
+        });
+        
+        // Set nilai mac address sesuai dengan interface yang dipilih
+        inputMacAddress.value = selectedInterfaceData.mac_address;
+    });
+</script>
 @endsection

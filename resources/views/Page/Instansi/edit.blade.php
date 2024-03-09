@@ -31,11 +31,11 @@
                         @csrf
                         @method('PUT')
 
+                       
                         <div class="mb-3">
                             <label for="nama_instansi" class="form-label">Nama Instansi</label>
-                            <input type="text" class="form-control" id="nama_instansi" name="nama_instansi" value="{{ $instansi->nama_instansi }}" required>
+                            <input type="text" class="form-control" id="nama_instansi" name="nama_instansi" value="{{ $instansi->nama_instansi }}" readonly>
                         </div>
-
                         <div class="mb-3">
                             <label for="admin_jaringan" class="form-label">Admin Jaringan</label>
                             <input type="text" class="form-control" id="admin_jaringan" name="admin_jaringan" value="{{ $instansi->admin_jaringan }}" required>
@@ -47,8 +47,8 @@
                         </div>
 
                         <div class="mb-3">
-                            <label for="ip_wan" class="form-label">IP WAN</label>
-                            <input type="text" class="form-control" id="ip_wan" name="ip_wan" value="{{ $instansi->ip_wan }}" required>
+                            <label for="mac_address" class="form-label">IP WAN</label>
+                            <input type="text" class="form-control" id="mac_address" name="mac_address" value="{{ $instansi->mac_address }}" readonly>
                         </div>
 
                         <div class="mb-3">

@@ -19,78 +19,132 @@
 @endsection
 
 @section('content')
-    <div class="page-heading">
+    {{-- <div class="page-heading">
         <!-- ... (sesuaikan dengan kode sebelumnya) ... -->
         <section class="section">
             <div class="card">
-                <div id="map" style="height: 600px;"></div>
-
-                <script>
-                    var map = L.map('map').setView([{{ $instansi->first()->latitude }}, {{ $instansi->first()->longitude }}], 13);
-
-                    L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
-                        attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
-                    }).addTo(map);
-
-                    @foreach ($instansi as $instansi)
-                        var latitude = {{ $instansi->latitude }};
-                        var longitude = {{ $instansi->longitude }};
-
-                        // Marker dengan ikon kustom
-                        var customIcon = L.divIcon({
-                            className: 'rounded-icon',
-                            // html: '<img src="{{ asset('storage/' . $instansi->icon) }}" class="rounded-icon" style="width: 32px; height: 32px;">',
-                            html: '<img src="{{ asset('dist/assets/icons/loc.png') }}" class="rounded-icon" style="width: 32px; height: 32px;">',
-                            iconSize: [32, 32],
-                            iconAnchor: [16, 32],
-                            popupAnchor: [0, -32]
-                        });
-
-                        var marker = L.marker([latitude, longitude], {
-                            icon: customIcon
-                        }).addTo(map);
-
-                        // Tambahkan label dengan nama lokasi
-                        marker.bindTooltip(
-                            '<b>{{ $instansi->nama_instansi }}</b>&nbsp; <img src="{{ asset('dist/assets/icons/up.png') }}" class="rounded-icon" style="width: 16px; height: 16px;">', {
-                                permanent: true,
-                                className: "location-label",
-                                offset: [0, 0]
-                            });
-
-                        // Tambahkan event click pada marker
-                        marker.on('click', function(e) {
-                            // Tampilkan informasi detail instansi
-                            var detailInfo = '<b>{{ $instansi->nama_instansi }}</b>' +
-                                '<table style="width:100%">' +
-                                '    <tr>' +
-                                '        <td>Admin Jaringan</td>' +
-                                '        <td>:</td>' +
-                                '        <td>{{ $instansi->admin_jaringan }}</td>' +
-                                '    </tr>' +
-                                '    <tr>' +
-                                '        <td>Telepon</td>' +
-                                '        <td>:</td>' +
-                                '        <td>{{ $instansi->telepon }}</td>' +
-                                '    </tr>' +
-                                '    <tr>' +
-                                '        <td>IP WAN</td>' +
-                                '        <td>:</td>' +
-                                '        <td>{{ $instansi->ip_wan }}</td>' +
-                                '    </tr>' +
-                                '</table>' +
-                                '<center><img src="{{ asset('storage/' . $instansi->icon) }}" class="rounded" style="width: 128px; height: 128px;"></center><br>';
-
-                            // Popup untuk menampilkan informasi detail
-                            L.popup()
-                                .setLatLng(e.latlng)
-                                .setContent(detailInfo)
-                                .openOn(map);
-                        });
-                    @endforeach
-                </script>
+                
 
             </div>
         </section>
+
+    </div> --}}
+    <div class="row">
+        <div class="col-md-8">
+            <div class="page-heading">
+                <section class="section">
+                    <div class="card">
+                        <div id="map" style="height: 600px; width:100%;"></div>
+        
+        
+                        <script>
+                            var map = L.map('map').setView([{{ $instansi->first()->latitude }}, {{ $instansi->first()->longitude }}], 13);
+        
+                            L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+                                attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+                            }).addTo(map);
+        
+                            @foreach ($instansi as $instansi)
+                                var latitude = {{ $instansi->latitude }};
+                                var longitude = {{ $instansi->longitude }};
+        
+                                // Marker dengan ikon kustom
+                                var customIcon = L.divIcon({
+                                    className: 'rounded-icon',
+                                    // html: '<img src="{{ asset('storage/' . $instansi->icon) }}" class="rounded-icon" style="width: 32px; height: 32px;">',
+                                    html: '<img src="{{ asset('dist/assets/icons/loc.png') }}" class="rounded-icon" style="width: 32px; height: 32px;">',
+                                    iconSize: [32, 32],
+                                    iconAnchor: [16, 32],
+                                    popupAnchor: [0, -32]
+                                });
+        
+                                var marker = L.marker([latitude, longitude], {
+                                    icon: customIcon
+                                }).addTo(map);
+        
+                                // Tambahkan label dengan nama lokasi
+                                marker.bindTooltip(
+                                    '<b>{{ $instansi->nama_instansi }}</b>', {
+                                        permanent: true,
+                                        className: "location-label",
+                                        offset: [0, 0]
+                                    });
+        
+                                // Tambahkan event click pada marker
+                                marker.on('click', function(e) {
+                                    // Tampilkan informasi detail instansi
+                                    var detailInfo = '<b>{{ $instansi->nama_instansi }}</b>' +
+                                        '<table style="width:100%">' +
+                                        '    <tr>' +
+                                        '        <td>Admin Jaringan</td>' +
+                                        '        <td>:</td>' +
+                                        '        <td>{{ $instansi->admin_jaringan }}</td>' +
+                                        '    </tr>' +
+                                        '    <tr>' +
+                                        '        <td>Telepon</td>' +
+                                        '        <td>:</td>' +
+                                        '        <td>{{ $instansi->telepon }}</td>' +
+                                        '    </tr>' +
+                                        '    <tr>' +
+                                        '        <td>MAC ADDRESS</td>' +
+                                        '        <td>:</td>' +
+                                        '        <td>{{ $instansi->mac_address }}</td>' +
+                                        '    </tr>' +
+                                        '</table>' +
+                                        '<center><img src="{{ asset('storage/' . $instansi->icon) }}" class="rounded" style="width: 128px; height: 128px;"></center><br>';
+        
+                                    // Popup untuk menampilkan informasi detail
+                                    L.popup()
+                                        .setLatLng(e.latlng)
+                                        .setContent(detailInfo)
+                                        .openOn(map);
+                                });
+                            @endforeach
+                        </script>                    
+                    </div>
+                </section>
+            </div>
+        </div>
+
+
+        <div class="col-md-4">
+            <div class="page-heading">
+                <section class="section">
+                    <div class="card">
+                        <div id="testMikrotikContent" style="height: 600px; overflow-y: auto;">
+                            <!-- Konten di sini -->
+                        </div>
+                    </div>
+                </section>
+            </div>
+        </div>
+        
+        
     </div>
+    
+  
+
+@endsection
+@section('script')
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
+<script>
+    // Function to load Blade content into specified element by ID
+    function loadBladeContent() {
+        var xhttp = new XMLHttpRequest();
+        xhttp.onreadystatechange = function() {
+            if (this.readyState == 4 && this.status == 200) {
+                document.getElementById("testMikrotikContent").innerHTML = this.responseText;
+            }
+        };
+        xhttp.open("GET", "{{ route('testmikrotik') }}", true); // Change 'testmikrotik' to your route name
+        xhttp.send();
+    }
+
+    // Call the function initially to load the content
+    loadBladeContent();
+
+    // Refresh the content every second
+    setInterval(loadBladeContent, 1000);
+</script>
+    
 @endsection

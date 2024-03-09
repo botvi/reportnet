@@ -13,6 +13,8 @@ use App\Http\Controllers\{
     TelegramController,
     LaporanController,
     UserController,
+    TrafficController,
+    LoginMikrotikController,
 
 };
 
@@ -112,6 +114,18 @@ Route::group([
     Route::put('/{id}', [TelegramController::class, 'update'])->name('telegram.update')->middleware('role:admin');
 });
 
+Route::group([
+    'middleware' => ["auth"],
+    'prefix' => "mikrotik"
+], function ($router) {
+    Route::get('/', [LoginMikrotikController::class, 'show'])->name('mikrotik.index')->middleware('role:admin');
+    Route::get('/form', [LoginMikrotikController::class, 'form'])->name('mikrotik.form');
+    Route::post('/store', [LoginMikrotikController::class, 'store'])->name('mikrotik.store')->middleware('role:admin');
+    Route::get('/destroy/{id}', [LoginMikrotikController::class, 'destroy']);
+    Route::get('/{id}/edit', [LoginMikrotikController::class, 'edit'])->name('mikrotik.edit')->middleware('role:admin');
+    Route::put('/{id}', [LoginMikrotikController::class, 'update'])->name('mikrotik.update')->middleware('role:admin');
+});
+
 
 Route::group([
     'middleware' => ["auth"],
@@ -127,3 +141,5 @@ Route::group([
     Route::post('/update', [UserController::class, 'updateAccount'])->name('update.account')->middleware('role:instansi');
 
 });
+
+Route::get('/traffic', [TrafficController::class, 'traffic'])->name('testmikrotik');

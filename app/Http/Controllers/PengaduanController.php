@@ -96,7 +96,6 @@ class PengaduanController extends Controller
             'deskripsi' => 'required',
         ]);
 
-        // Update the 'deskripsi' field
         $pengaduan = Pengaduan::find($id);
         $pengaduan->deskripsi = $request->deskripsi;
         $pengaduan->save();
@@ -105,26 +104,19 @@ class PengaduanController extends Controller
     }
     protected function sendTelegramMessage($namaInstansi, $deskripsiTitle)
     {
-        // Assuming you have only one row in the telegrams table
         $telegram = Telegram::first();
 
-        // Check if Telegram record is found
         if (!$telegram) {
-            // Handle case where Telegram data is not found
             return redirect()->back()->with('error', 'Data Telegram tidak ditemukan.');
         }
 
-        // Get the API token and chat ID from the retrieved data
         $botToken = $telegram->api_token;
         $chatId = $telegram->id_chat;
 
-        // Construct the message text
         $messageText = "Pengaduan baru dari <b>{$namaInstansi}</b> mengenai <b>{$deskripsiTitle}.</b>";
 
-        // Construct the Telegram API URL
         $telegramApiUrl = "https://api.telegram.org/bot{$botToken}/sendMessage";
 
-        // Make the request to the Telegram API using Laravel's HTTP Client
         Http::post($telegramApiUrl, [
             'chat_id' => $chatId,
             'parse_mode' => 'HTML',

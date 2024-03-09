@@ -7,6 +7,7 @@ use RealRashid\SweetAlert\Facades\Alert;
 use Illuminate\Http\Request;
 use App\Models\Instansi;
 use App\Models\User;
+use App\Models\ApiMikrotik;
 use Illuminate\Support\Facades\DB;
 
 class InstansiController extends Controller
@@ -18,10 +19,33 @@ class InstansiController extends Controller
     }
 
     public function form()
-    {
-        $instansis = Instansi::all();
-        return view('Page.Instansi.form', compact('instansis'));
+{
+    $API = new ApiMikrotik();
+    $API->debug = false;
+
+    $interfaces = [];
+
+    if ($API->connect('192.168.10.1', 'admin', '1')) {
+        $interfaceData = $API->comm('/interface/print');
+
+        foreach ($interfaceData as $interface) {
+            $name = $interface['name'];
+            $macAddress = $interface['mac-address'];
+
+            $interfaces[] = [
+                'name' => $name,
+                'mac_address' => $macAddress,
+            ];
+        }
+
+        $API->disconnect();
     }
+    // Ambil instansi untuk formulir
+    $instansis = Instansi::all();
+
+    return view('Page.Instansi.form', compact('instansis', 'interfaces'));
+}
+
 
     public function store(Request $request)
     {
@@ -31,13 +55,14 @@ class InstansiController extends Controller
                 'nama_instansi' => 'required|string',
                 'admin_jaringan' => 'required|string',
                 'telepon' => 'required|string',
-                'ip_wan' => 'required|string',
+                'mac_address' => 'required|string|regex:/^([0-9A-Fa-f]{2}[:-]){5}([0-9A-Fa-f]{2})$/',
                 'latitude' => 'required|string',
                 'longitude' => 'required|string',
                 'username' => 'required|string|unique:users',
                 'password' => 'required|string|min:8',
                 'icon' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
             ]);
+            
 
             // Jika validasi gagal, kembali ke form dengan pesan error
             if ($validator->fails()) {
@@ -63,7 +88,7 @@ class InstansiController extends Controller
                     'nama_instansi' => $request->get('nama_instansi'),
                     'admin_jaringan' => $request->get('admin_jaringan'),
                     'telepon' => $request->get('telepon'),
-                    'ip_wan' => $request->get('ip_wan'),
+                    'mac_address' => $request->get('mac_address'),
                     'latitude' => $request->get('latitude'),
                     'longitude' => $request->get('longitude'),
                     'icon' => $iconPath,
@@ -95,10 +120,8 @@ class InstansiController extends Controller
         try {
             // Validasi input
             $validator = Validator::make($request->all(), [
-                'nama_instansi' => 'required|string',
                 'admin_jaringan' => 'required|string',
                 'telepon' => 'required|string',
-                'ip_wan' => 'required|string',
                 'latitude' => 'required|string',
                 'longitude' => 'required|string',
                 'icon' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
@@ -117,10 +140,8 @@ class InstansiController extends Controller
     
                 // Perbarui data instansi
                 $instansi->update([
-                    'nama_instansi' => $request->get('nama_instansi'),
                     'admin_jaringan' => $request->get('admin_jaringan'),
                     'telepon' => $request->get('telepon'),
-                    'ip_wan' => $request->get('ip_wan'),
                     'latitude' => $request->get('latitude'),
                     'longitude' => $request->get('longitude'),
                 ]);

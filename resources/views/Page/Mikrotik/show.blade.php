@@ -4,14 +4,14 @@
         <div class="page-title">
             <div class="row">
                 <div class="col-12 col-md-6 order-md-1 order-last">
-                    <h3>Instansi</h3>
-                    <p class="text-subtitle text-muted">Tambah Data Instansi</p>
+                    <h3>Mikrotik</h3>
+                    <p class="text-subtitle text-muted">Tambah Data Mikrotik</p>
                 </div>
                 <div class="col-12 col-md-6 order-md-2 order-first">
                     <nav aria-label="breadcrumb" class="breadcrumb-header float-start float-lg-end">
                         <ol class="breadcrumb">
                             <li class="breadcrumb-item"><a href="/">Dashboard</a></li>
-                            <li class="breadcrumb-item active" aria-current="page">Instansi</li>
+                            <li class="breadcrumb-item active" aria-current="page">Mikrotik</li>
                         </ol>
                     </nav>
                 </div>
@@ -20,7 +20,7 @@
         <section class="section">
             <div class="card">
                 <div class="card-header">
-                    <a type="button" href="/instansi/form"class="btn icon icon-left btn-primary float-right"><i
+                    <a type="button" href="/mikrotik/form"class="btn icon icon-left btn-primary float-right"><i
                             class="bi bi-plus-circle"></i>
                         TAMBAH DATA
                     </a>
@@ -31,35 +31,34 @@
                         <thead>
                             <tr>
                                 <th scope="col">#</th>
-                                <th scope="col">Nama Instansi</th>
-                                <th scope="col">Admin Jaringan</th>
-                                <th scope="col">Telepon</th>
-                                <th scope="col">MAC ADDRESS</th>
-                                <th scope="col">Latitude</th>
-                                <th scope="col">Longitude</th>
+                                <th scope="col">IP</th>
+                                <th scope="col">USERNAME</th>
+                                <th scope="col">PASSWORD</th>
                                 <th scope="col">Aksi</th>
                         </thead>
                         <tbody>
-                            @foreach ($instansis as $index => $instansi)
+                            @foreach ($mikrotik as $index => $mikrotik)
                                 <tr>
                                     <th scope="row">{{ $index + 1 }}</th>
-                                    <td>{{ $instansi->nama_instansi }}</td>
-                                    <td>{{ $instansi->admin_jaringan }}</td>
-                                    <td>{{ $instansi->telepon }}</td>
-                                    <td>{{ $instansi->mac_address }}</td>
-                                    <td>{{ $instansi->latitude }}</td>
-                                    <td>{{ $instansi->longitude }}</td>
+                                    <td>{{ $mikrotik->ip }}</td>
+                                    <td>{{ $mikrotik->username }}</td> 
+                                    <td>{{ $mikrotik->password }}</td> 
+                                    
 
                                     <td>
                                         <a class="btn btn-danger btn-sm ml-1 w-[50px] data-destroy"
-                                            data-id="{{ $instansi->id }}"><i class="bi bi-trash"></i></a>
-                                        <a href="{{ route('instansi.edit', $instansi->id) }}"
+                                            data-id="{{ $mikrotik->id }}"><i class="bi bi-trash"></i></a>
+                                        <a href="{{ route('mikrotik.edit', $mikrotik->id) }}"
                                             class="btn btn-success btn-sm ml-1 w-[50px]"><i class="bi bi-pencil-square"></i></a>
                                     </td>
 
                                 </tr>
                             @endforeach
                         </tbody>
+                        <tfoot>
+                            <tr>
+                                <th colspan="4" class="text-center" scope="col">MIKROTIK HANYA BISA SATU , JANGAN LEBIH !</th>
+                            </tfoot>
                     </table>
                 </div>
             </div>
@@ -71,7 +70,7 @@
     <script>
         $(document).on("click", ".data-destroy", function() {
             const id = $(this).data("id");
-            const url = "/instansi/destroy/" + id;
+            const url = "/mikrotik/destroy/" + id;
             destroy(url); // Corrected function name
         });
     </script>

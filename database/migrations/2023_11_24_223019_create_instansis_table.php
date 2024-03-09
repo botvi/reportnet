@@ -18,7 +18,7 @@ return new class extends Migration {
             $table->unsignedBigInteger('user_id');
             $table->string('admin_jaringan');
             $table->string('telepon');
-            $table->string('ip_wan');
+            $table->string('mac_address');
             $table->string('latitude');
             $table->string('longitude');
             $table->string('icon');

@@ -14,7 +14,7 @@ class Instansi extends Model
         'user_id',
         'admin_jaringan',
         'telepon',
-        'ip_wan',
+        'mac_address',
         'latitude',
         'longitude',
         'role',
