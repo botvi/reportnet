@@ -44,10 +44,10 @@ class PengaduanController extends Controller
             // Get the logged-in user's ID
             $user_id = Auth::id();
     
-            // Handle file upload
+            // Handle file upload using move
             if ($request->hasFile('gambar')) {
-                $imageName = time() . '.' . $request->gambar->extension();
-                $request->gambar->storeAs('gambar_aduan', $imageName, 'public');
+                $imageName = time() . '.' . $request->file('gambar')->getClientOriginalExtension();
+                $imagePath = $request->file('gambar')->move(public_path('gambar_aduan'), $imageName);
             } else {
                 $imageName = null; // Set to null if no image is provided
             }
@@ -62,12 +62,13 @@ class PengaduanController extends Controller
                 'status' => 'Terkirim',
             ]);
     
-            // You can directly access the related instansi without using "with"
+            // Access the related instansi without using "with"
             $instansiNama = $pengaduan->user->instansi->nama_instansi;
     
             // Commit the transaction
             DB::commit();
     
+            // Send the Telegram message
             $this->sendTelegramMessage($instansiNama, $pengaduan->deskripsi_title);
     
             return redirect()->route('pengaduan.form')->with('success', 'Pengaduan has been submitted successfully.');
@@ -79,6 +80,7 @@ class PengaduanController extends Controller
             return redirect()->back()->with('error', 'Error occurred: ' . $e->getMessage());
         }
     }
+    
 
 
     public function editDeskripsi($id)

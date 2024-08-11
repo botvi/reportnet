@@ -11,7 +11,7 @@ class LaporanController extends Controller
     public function laporan()
     {
         $laporan = DB::table('instansi')
-        ->select('instansi.nama_instansi', 'instansi.admin_jaringan', 'instansi.telepon', 'instansi.ip_wan', 'pengaduans.deskripsi_title','pengaduans.status')
+        ->select('instansi.nama_instansi', 'instansi.admin_jaringan', 'instansi.telepon', 'instansi.mac_address', 'pengaduans.deskripsi_title','pengaduans.status')
         ->join('users', 'instansi.user_id', '=', 'users.id')
         ->join('pengaduans', 'users.id', '=', 'pengaduans.user_id')
         ->where('pengaduans.status', '=', 'Selesai')

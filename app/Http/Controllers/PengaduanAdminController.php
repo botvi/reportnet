@@ -17,7 +17,7 @@ class PengaduanAdminController extends Controller
             ->orderBy('created_at', 'desc')
             ->get();
     
-        return view('Page.Pengaduan.Show', compact('pengaduan'));
+        return view('Page.Pengaduan.show', compact('pengaduan'));
     }
 
     public function edit($id)

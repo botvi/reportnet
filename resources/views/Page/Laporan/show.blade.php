@@ -85,7 +85,7 @@
                 <th>Nama Instansi</th>
                 <th>Admin Jaringan</th>
                 <th>Telepon</th>
-                <th>IP</th>
+                <th>MAC ADDRESS</th>
                 <th>Pengaduan</th>
                 <th>Status</th>
          
@@ -102,7 +102,7 @@
                     <td>{{ $data->nama_instansi }}</td>
                     <td>{{ $data->admin_jaringan }}</td>
                     <td>{{ $data->telepon }}</td>
-                    <td>{{ $data->ip_wan }}</td>
+                    <td>{{ $data->mac_address }}</td>
                     <td>{{ $data->deskripsi_title }}</td>
                     <td>{{ $data->status }}</td>
                    

@@ -41,7 +41,7 @@
                                     <td>
                                         @if ($pengaduan->gambar)
                                             <button type="button" class="btn btn-info btn-sm"
-                                                onclick="showImage('{{ asset('storage/' . $pengaduan->gambar) }}')">Cek
+                                                onclick="showImage('{{ asset($pengaduan->gambar) }}')">Cek
                                                 Gambar</button>
                                         @else
                                             Tidak Ada Gambar
